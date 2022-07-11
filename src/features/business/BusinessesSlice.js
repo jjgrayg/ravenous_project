@@ -12,7 +12,7 @@ function isEmptyObject(obj){
 export const fetchBusinessesWithSearch = createAsyncThunk(
 	'businesses/getBusinesses',
 	async (searchObj) => {
-		let url = `http://cors-proxy.htmldriven.com/?url=https://api.yelp.com/v3/businesses/search?term=${searchObj.term}`;
+		let url = `https://api.yelp.com/v3/businesses/search?term=${searchObj.term}`;
 		if (searchObj.location === '') {
 			url += `&latitude=${encodeURI(searchObj.computerLocation.lat)}&longitude=${encodeURI(searchObj.computerLocation.lng)}`;
 		}
@@ -23,6 +23,7 @@ export const fetchBusinessesWithSearch = createAsyncThunk(
 		const response = await fetch(
 			url,
 			{
+				mode: 'no-cors',
 				headers: {
 					Authorization: `Bearer ${apiKey}` 
 				}
@@ -54,13 +55,14 @@ export const fetchAutofillRecommendations = createAsyncThunk(
 	'businesses/autofillRecommendations',
 	async ({term, location}) => {
 		if (term) {
-			let url = `http://cors-proxy.htmldriven.com/?url=https://api.yelp.com/v3/autocomplete?text=${term}`;
+			let url = `https://api.yelp.com/v3/autocomplete?text=${term}`;
 			if (location.lat !== undefined && location.lng !== undefined) {
 				url += `&latitude=${encodeURI(location.lat)}&longitude=${encodeURI(location.lng)}`;
 			}
 			const response = await fetch(
 				url,
 				{
+					mode: 'no-cors',
 					headers: {
 						Authorization: `Bearer ${apiKey}`
 					}
