@@ -64,8 +64,6 @@ export const SearchBar = () => {
 	useEffect(() => {
 		const watchID = navigator.geolocation.watchPosition(
 			function(position) {
-				console.log('Position:', position);
-				console.log('Coords:', position.coords);
 				setCompLocation({
 					lat: position.coords.latitude.toFixed(10),
 					lng: position.coords.longitude.toFixed(10),
@@ -146,7 +144,6 @@ export const SearchBar = () => {
 								remainingText = autofillArray[i].slice(letter - autofillArray[i].length + 1);
 							else
 								remainingText = '';
-							console.log('"' + matchedText + '" + "' + remainingText + '"');
 						}
 						else break;
 					}
@@ -196,7 +193,6 @@ export const SearchBar = () => {
 								e.preventDefault();
 								e.target.style.boxShadow = 'inset 0px 0px 0px 1px red';
 								e.target.style.border = '1px solid red';
-								console.log(e.target.style);
 							}}
 						/>
 						{renderAutofill()}
@@ -215,7 +211,6 @@ export const SearchBar = () => {
 								e.preventDefault();
 								e.target.style.boxShadow = 'inset 0px 0px 0px 1px red';
 								e.target.style.border = '1px solid red';
-								console.log(e.target.style);
 							}}
 						/>
 						<p className="tiny-text" style={{display: locRequired ? 'none' : 'block'}}>Leave this box empty to automatically search for places near your location</p>
